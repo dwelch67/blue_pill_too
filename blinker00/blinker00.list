@@ -1,0 +1,83 @@
+
+blinker00.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+08000000 <_start>:
+ 8000000:	20001000 	andcs	r1, r0, r0
+ 8000004:	08000041 	stmdaeq	r0, {r0, r6}
+ 8000008:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+ 800000c:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+ 8000010:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+ 8000014:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+ 8000018:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+ 800001c:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+ 8000020:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+ 8000024:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+ 8000028:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+ 800002c:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+ 8000030:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+ 8000034:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+ 8000038:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+ 800003c:	08000077 	stmdaeq	r0, {r0, r1, r2, r4, r5, r6}
+
+08000040 <reset>:
+ 8000040:	480d      	ldr	r0, [pc, #52]	; (8000078 <hang+0x2>)
+ 8000042:	6941      	ldr	r1, [r0, #20]
+ 8000044:	4a0d      	ldr	r2, [pc, #52]	; (800007c <hang+0x6>)
+ 8000046:	4311      	orrs	r1, r2
+ 8000048:	6141      	str	r1, [r0, #20]
+ 800004a:	480d      	ldr	r0, [pc, #52]	; (8000080 <hang+0xa>)
+ 800004c:	6801      	ldr	r1, [r0, #0]
+ 800004e:	4a0d      	ldr	r2, [pc, #52]	; (8000084 <hang+0xe>)
+ 8000050:	4391      	bics	r1, r2
+ 8000052:	4a0d      	ldr	r2, [pc, #52]	; (8000088 <hang+0x12>)
+ 8000054:	4311      	orrs	r1, r2
+ 8000056:	6001      	str	r1, [r0, #0]
+ 8000058:	6841      	ldr	r1, [r0, #4]
+ 800005a:	4a0c      	ldr	r2, [pc, #48]	; (800008c <hang+0x16>)
+ 800005c:	4391      	bics	r1, r2
+ 800005e:	6041      	str	r1, [r0, #4]
+
+08000060 <loop_top>:
+ 8000060:	490a      	ldr	r1, [pc, #40]	; (800008c <hang+0x16>)
+ 8000062:	6181      	str	r1, [r0, #24]
+ 8000064:	4a0a      	ldr	r2, [pc, #40]	; (8000090 <hang+0x1a>)
+
+08000066 <loop0>:
+ 8000066:	3a01      	subs	r2, #1
+ 8000068:	d1fd      	bne.n	8000066 <loop0>
+ 800006a:	490a      	ldr	r1, [pc, #40]	; (8000094 <hang+0x1e>)
+ 800006c:	6181      	str	r1, [r0, #24]
+ 800006e:	4a08      	ldr	r2, [pc, #32]	; (8000090 <hang+0x1a>)
+
+08000070 <loop1>:
+ 8000070:	3a01      	subs	r2, #1
+ 8000072:	d1fd      	bne.n	8000070 <loop1>
+ 8000074:	e7f4      	b.n	8000060 <loop_top>
+
+08000076 <hang>:
+ 8000076:	e7fe      	b.n	8000076 <hang>
+ 8000078:	40021000 	andmi	r1, r2, r0
+ 800007c:	00020000 	andeq	r0, r2, r0
+ 8000080:	48000000 	stmdami	r0, {}	; <UNPREDICTABLE>
+ 8000084:	00000300 	andeq	r0, r0, r0, lsl #6
+ 8000088:	00000100 	andeq	r0, r0, r0, lsl #2
+ 800008c:	00000010 	andeq	r0, r0, r0, lsl r0
+ 8000090:	00040000 	andeq	r0, r4, r0
+ 8000094:	00100000 	andseq	r0, r0, r0
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002041 	andeq	r2, r0, r1, asr #32
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000016 	andeq	r0, r0, r6, lsl r0
+  10:	726f4305 	rsbvc	r4, pc, #335544320	; 0x14000000
+  14:	2d786574 	cfldr64cs	mvdx6, [r8, #-464]!	; 0xfffffe30
+  18:	0600304d 	streq	r3, [r0], -sp, asr #32
+  1c:	094d070c 	stmdbeq	sp, {r2, r3, r8, r9, r10}^
+  20:	Address 0x0000000000000020 is out of bounds.
+

@@ -12,55 +12,31 @@ stm32 blue pill
 
 you will find a number of websites on programming it or whatever.
 
-This repo has nothing to do with that blue pill nor anything Arduino
+This repo has NOTHING to do with that blue pill nor anything Arduino
 these are baremetal examples without a library, this is about seeing
 and learning the details so you can make your own library or so you
 can read through others.
 
-And the board used here is also a blue board from ebay, search for
+This repo is centered around this blue pill that doesnt yet have a
+catchy name maybe blue pill two?  Search for
 
 stm32f030f4p6 board
 
-and you will see a plethera of boards for less than a couple
-bucks each.  I have included a picture ebay_board.png to show the
-specific one you are looking for has two four pin headers on the
-bottom one is uart based the other jtag.
-
-I dont know what your ebay experience has been mine was really good
-for a long time but got scammed a couple of times recently, with no
-help from ebay or paypal.  Basically the scammer takes your money
-sends a package/envelope that contains no product, maybe a sorry your
-product will be shipped when available note.  As far as ebay is
-concerned there was a purchase, there was something mailed with a
-tracking number that showed it was delivered, end of story.  I think
-the only ammo you have against this is a very bad review
-
-TOTAL SCAM, empty evenlope, no product no refund
-
-Look at the bad reviews for these vendors (as you always should) and
-see if it is the normal it never arrived, it was broken, stuff that you
-expect to see a small percentage of, or is it a collection of I got
-a piece of wire and an apology note about a delay.  Also dont fall for
-the if you give me a good review I will refund you.  What is your
-paypal information so I can refund you.  This is all bogus your
-response is it is the paypal info used for this order (they have this
-info) and if you refund me then I wont write a bad review.  If they
-stall too long then start imposing a deadline, you have 48 hours, you
-have 24 hours.  Basically send a response to every one of their
-responses, and if they go more than 24 or 48 hours before answering a
-question, hit them again.  Or just hit them with a message every day
-until resolved.  If they simply dont re-imburse you then just give up
-and write the bad review and call it a loss.
+on ebal and you will see many vendors selling these boards as low
+as less than a couple of dollars.  I have included a picture
+ebay_board.png to show the specific one you are looking for.  It has
+two four pin headers on the bottom one is uart based the other jtag.
 
 I tend to buy two of everything, as every so often no matter how much
 experience, you let some smoke out.  If you like the thing you might
 turn one into a project for a while so that consumes that one.  The
 free shipping ones tend to be months before it arrives, the pay for
-shipping tend to be weeks.  So the 5x ones with a couple bucks of
-shipping are about ideal between shipping cost, time to deliver and
-how much money you are risking losing if scammed.
+shipping tend to be weeks.  Some sellers have 5 boards for a price
+with one shipping cost (couple of bucks or less), that is about the
+right balance between shipping cost, time to deliver, and how much
+money you are risking losing if scammed.
 
-Now there are one or two more things I recommend, these are toolbox
+Now there are a few more things I recommend, these are toolbox
 items you will want for this and future projects.  One is a usb to
 uart solution, FTDI pretty much dominates this type of market, the
 board I have in mind I found currently with the search
