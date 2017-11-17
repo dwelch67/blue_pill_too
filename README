@@ -1,0 +1,361 @@
+
+If you go to ebay and search for
+stm32f103c8t6 board
+you will find a plethera of folks selling a breakout board for a
+couple bucks give or take.  There was Arduino support for this created
+by someone and also at some point this was given the name "blue pill".
+If you google
+stm32 blue pill
+you will find a number of websites on programming it or whatever.
+
+This repo has nothing to do with that blue pill nor anything Arduino
+these are baremetal examples without a library hiding the details, this
+is about seeing and learning the details so you can make your own
+library or so you can read through others.
+
+And the board in question is as far as the ebay vendors go a follow
+on to the blue pill, search for
+stm32f030f4p6 board
+on ebay and you will see a plethera of boards for less than a couple
+bucks each.  I have included a picture ebay_board.png to show the
+specific one you are looking for has two four pin headers on the
+bottom one is uart based the other jtag.
+
+I dont know what your ebay experience has been mine was really good
+for a long time but got scammed a couple of times recently, with no
+help from ebay or paypal.  Basically the scammer takes your money
+sends a package/envelope that contains no product, maybe a sorry your
+product will be shipped when available note.  As far as ebay is concerned
+there was a purchase, there was something mailed with a tracking number
+that showed it was delivered, end of story.  I think the only ammo you
+have against this is a very bad review
+TOTAL SCAM, empty evenlope, no product no refund
+Look at the bad reviews for these vendors (as you always should) and
+see if it is the normal it never arrived, it was broken, stuff that you
+expect to see a small percentage of, or is it a collection of I got
+some wire and an apology note.  Also dont fall for the if you give me
+a good review I will refund you.  What is your paypal information so
+I can refund you.  This is all bogus your response is it is the paypal
+info used for this order (they have this info) and if you refund me then
+I wont write a bad review.  If they stall too long then start imposing
+a deadline, you have 48 hours, you have 24 hours.  Then just give up and
+write the bad review and call it a loss.
+
+I tend to buy two of everything, as every so often no matter how much
+experience, you let some smoke out.  If you like the thing you might
+turn one into a project for a while so that consumes that one.  The
+free shipping ones tend to be months before it arrives, the pay for
+shipping tend to be weeks.  So the 5x ones with a couple bucks of
+shipping are about ideal between shipping cost, time to deliver and
+how much money you are risking losing if scammed.
+
+Now there are one or two more things I recommend, these are toolbox
+items you will want for this and future projects.  One is a usb to
+uart solution, FTDI pretty much dominates this type of market, the
+board I have in mind I found currently with the search
+ft232rl arduino
+But what you are generally after is a 3.3v ftdi breakout board of some
+kind, the arduino world used to not have and still some dont, power
+so there was a standard header, and most of those are 5.0V but some
+are 3.3V we want 3.3V here (should always read the documentation for
+the part you are using to confirm this, eventually this will become
+1.8V interfaces or other).  I have included the image ftdi_board.jpg.
+But there are many solutions and not all are FTDI based, some are
+not boards but cables with the uart built into the cable.
+
+There is a newer looking blue one with a switch rather than a jumper
+I think I paid under two dollars each for the ftdi_board.jpg ones,
+probably bought 10 of them at a time.
+
+The last thing required for the toolbox, if you have a breakout type
+board are some jumper wires like these
+https://www.sparkfun.com/products/8430
+F/F in this case means female to female, which for the boards I have
+are the correct ones.  If your ftdi/uart breakout is femal then you
+will want M/F or male to female or female to male depending on how they
+list it.  Can buy these on ebay much cheaper, probably adafruit as well.
+You pay several times more for usb uart boards at sparkfun or adafruit
+and pay a lot for shipping (if they could only solve the shipping problem
+I can get stuff from arund the world here at a fraction of the shipping
+cost from colorado), but your risk is low shipping is a little to a lot
+faster.  I have stacks of little red sparkfun boxes, I do suppor them
+and adafruit as well as ebay vendors.  I am still working off of one
+or two 100 packs of jumper wires from sparkfun, M/M, M/F, F/F.
+
+If you search for
+female female jumper wire
+you find many solutions, most look like ribbon cables so I guess you have
+to pull/rip the individual ones apart (some ribbon cables separate
+better than others).  Or get them already separate.
+
+The last thing and this is optional but still good for your toolbox is
+an SWD (not really jtag) solution, the cortex-m supports a single
+wire debug interface (SWD) which isnt a single wire but whatever
+it is three wires at least SWDCLK, SWDIO and ground, since the world
+can use 5.0V, 3.3V or 1.8 or others, there is also optionally a sense
+line that is either sense or it directly drives the I/O of the part
+to match what you have so for these boards (see jlink.jpg) there is a
+VCC (TVCC) signal as well.  This is generally the case for JTAG type
+stuff but there is a usb dongle that may power on that line instead
+of sense so be careful.  The jlink name is actually stolen from Segger
+who makes the real product which is about mid scale on price.  This
+day and age there is no reason to be paying more than 10-20 dollars
+for a jtag solution.  Some you are paying for faster speeds, but the
+ftdi parts with mpsee are now up to 30Khz which for some
+microcontrollers is already too fast.  Get the right ftdi breakout
+board (one with mpsee which the popular FT232RL boards above do not
+have) wire it up right and use openocd which I recommend anyway and
+there you go, you saved up to thousands of dollars on a jtag solution.
+So I assume these clone the jlink usb protocol.  One side of this board
+is the SWD protocol defined by ARM, the other side needs to be a protocol
+over usb between the host software and the board, this can be whatever
+someone wants to invent.  Segger it may have a name but when you search
+for j-link you are looking for real or clones (they also have $10
+clones of the j-link with the full arm jtag cable on ebay which actually
+work and will work with these boards but you have to get the right pins
+connected).
+
+The alternate solution is to get an stlink dongle, which I was very
+dissapointed with, for less money you can get a full stm32 discovery
+or nucleo board.  ST has countless numbers of these, at least one per
+family, some are tiny sticks like the board above, others are wide
+and can handle a full Arduino shield.  Those have what looks like a
+board you can break off the top, I recommend one like that as the small
+stick ones you might not be able to use as a debug header.  the ones
+with the breakout are designed such that you can re-use that top
+part with your projects not just the part on the larger portion of the
+board, and you dont have to match cortex-m0 to cortex-m0 you can use a
+cortex-m4 board stlink debuger on any of these stm32 cortex-m
+microcontrollers.  Instead of speaking the j-link usb protocol they
+speak the stlink usb protocol (of which there are a few versions now).
+You remove a couple of jumpers to disconnect SWDIO and SWDCLK from the
+chip on the board then use another header to connect to the blue board
+read the docs for the STM32 board.  The stm32 discovery boards do not
+normally have a break off debugger (note you never HAVE TO break this
+off to use it) but have the jumpers, the same header, and can be used
+in this application as well.
+
+With the SWD solution, in particular the stlink solution since the
+discovery/nucleo boards have power for the board/projects you can
+power the blue board as well as hook it up to debug.  In some rare
+cases the nucleo debug header can also be used as a usb to uart,
+generally not though even though the pin labels and board layout
+implies, you have to read the fine print in the ST doc, some even have
+a solder bridge to connect/disconnect the debug header uart RX/TX
+only to find that feature didnt work on that board.
+
+You can find some FTDI boards that are just general breakout boards
+or eval boards or are perhaps JTAG boards for full sized ARM chips
+and you may find direct or indirect connections to the FTDI chip with
+a little reading you can have one board that provides both SWD and uart
+with one usb header.  Fully supported by openocd if wired right and
+the uart side is a freebie as the parts or more correctly the drivers
+tend to default to all uarts until you (software) repurposes one as
+SWD or SPI or JTAG or I2C or custom. (MPSSE is very simple to program
+and worth trying out for fun).
+
+Despite the above I am not going to handhold too much here.  Baremetal
+programming means no operating system, it has been incorrectly used
+by the cloud community, but despite that most folks tend to use the
+term correctly.  I am going so far as to not have a layer of libraries
+either, how is with os and libraries different than without os and
+libraries which hide most of the detail?  I highly recommend that
+you try libraries for these parts, you can most certainly use then
+for this part, the chip vendors as somewhat required to stay in business
+will abandon old libraries and API calls for new ones every so many
+years to remain fresh and new.  So there will be transition periods
+where the same part is supported by more than one solution from the
+vendor.  I think you should own the project, your boss wont care that
+the last 100,000 units that came off the assembly line are now trash
+because your firmware heavily used someone elses libraries which you
+neglected to check/test, or because your code screwed up, either way
+you screwed up and someone has to pay for the cost of repairing the
+product and/or writing it off as trash.  And when you look at some
+of these libraries you may find things that are very disturbing
+
+/* We can only erase on 4KB boundaries */
+while (addr & 0xFFF)
+{
+    addr--;
+}
+
+There is also a current fad to point structures or worse unions with
+structures across compile domains.  This might work for you today it
+might work for the next 10 years, but eventually it will fail as it
+falls into the "implementation defined" category of the C language
+which means it might work one way on one compiler but a new version
+of the compiler or some other compiler (which is a new implementation)
+may define how it works differently and your years of using this bad
+habit will begin to unravel and you will struggle to repair countless
+lines of code as well as try to break that habit and find a new one or
+even worse you may try to hack your way through with pragmas and command
+line options.  You are simply spiralling down to earth with a failed
+airplane, eventually it is game over. YMMV the other side of this is
+that instead of writing the code once, you get to touch the code
+every so many months to get it to work again which is possibly job
+security until the boss figures out that there are multiple other
+solutions that didnt include so much failure and rework and may replace
+you with someone that can get the job done without so much continual
+maintenance.
+
+Before I get off this soap box this is more than a personal preference
+it comes with decades of experience behind it.  It is rooted in the
+implementation defined areas of the C language which other languages
+may not have, but are not as useful as C so cannot unseat it as a leader
+in this field.  In this case using structures or worse bitfields across
+compile domains (the logic itself and thus the register space in the
+part is a separate compile domain from the software) is implementation
+defined, the failure is not knowing this, not knowing what that means
+and not understanding that just because it works on my favorite compiler
+does not mean that is how the language works.
+
+I neglected to see some wisdom from a mentor of mine that had his
+decades of experince before during and after C.  Pascal, and just plain
+assembly no doubt plus other languages perhaps.  He would say you
+want to make sure the specific instruction is used, and the only way
+to do that is in assembly, so an asm function linked in with the
+project.  Specifically talking about if I have to access something
+memory, I/O, or register with a specific size, say an 8 bit transfer
+then I need to use the right instruciton, dont let the compiler pick
+as it may pick wrong.  He was extremely parianoid because he had been
+burned so many times by tools and hardware engineers so he had a lot
+of protection habits that I resolved by actually talking the engineers
+as I am one anyway.  But in this case years later when I got into
+using simulation of logic be it a peripheral or a whole chip or a
+processor and i was simulating the peripherals, etc.  Abstracting
+the accesses with another function which for the final product was
+easiest to implement with assembly language, has a cost, but that
+cost is balanced by flexibility.  So as a habit this is how I do it
+now almost all the time, there are exceptions, as with just trying
+the vendor library, just tolerate me doing this throughout.  This
+code is in no way meant to be a library it is at best a reference
+but meant as just a vehicle to get you from fear of the unknown to
+I can do this myself.  Then you go off and write your own programs
+using your own habits and preferences and you OWN that solution.  You
+do this right and you can walk away from this with the skills to work
+at the various levels you are not limited to I can only figure out how
+to make API calls on some IDE provided by the vendor, I can step out
+of the sand box, take the training wheels off my bicycle and ride on
+the street with other vehicles.  (or I can play in the sandbox, I have
+the freedom to do either, not constrained).  I personally, generally,
+find the sandbox solutions are more work than just reading the chip
+docs and programming directly.  YMMV.
+
+So you will see here habits that I have formed based on either getting
+burned in the past, or by trying to do the work myself and not rely
+on ghee whiz magic of the toolchain or language.  Toolchains
+(compiler + assembler + linker) even if built from sources are tuned
+for your platform.  A gcc built for your windows machine is not only
+specific to the processor (x86 but now that varies) but specific to
+windows as well.  The binaries and the startup code and other items
+not normally seen by the printf("Hello World!\n"); programmer are
+operating system specific.  Same gcc source code built for Linux on
+the same PC produces different binaries using a different binary file
+format as well.  The code produced to add two numbers or a whole
+C function may be identical but the connetion to library calls is
+very operating system specific as can be the startup code and linker
+script.  Why mention this?  We are going to use gcc here as a cross
+compiler, so although you can find already made/modified cross
+compilers, part of baremetal programming is to master the toolchain.
+Beat it into submission.  And this unfortunately gets toolchain
+specific, so I will do some toolchain specific things but I prefer
+to minimize it, making less work in case the code needs to be ported,
+when I started with ARM processors I had a couple then sampled several
+other toolchains as I found as you should understand they didnt produce
+the same code from the high level source, I was testing a processor
+at the time and using as many compilers as I could get my hands on was
+useful as it almost immediately found a chip bug.  So I have always
+had this sensitivity to compiler and assembler and linker specific things
+you can do a great deal of ghee whiz things with a specific toolchain.
+Countless labor saving devices availble to you, but you would have to
+do all that work over again if you even wanted to evaluate something
+else.  YMMV.
+
+So because of the connection between the linker and bootstrap code
+to be efficient about where and how much .bss and .data data there is
+and maybe you can call it being lazy, but whatever I dont support
+.bss and .data correctly.
+
+unsigned int x;
+unsigned int y=5;
+
+my examples as written will not assume that x is zero nor that y is 5
+you need to do those initializations runtime, not compile time if you
+use my examples.  When you go and make them your own you can finish
+this education for your favorite toolchain.  I have bssdata directory
+in my raspberrypi repo where I explore how the linker works.  In that
+case the programs are all in ram.  For microcontrollers all the non
+volatile information is in flash, which should be considered read-only
+so how much and where .bss starts that info is in flash (if you craft
+a linker script to provide that information), likewise you have to
+craft the linker script or otherwise solve the problem of .data is
+non-zero information it has to be stored somewhere non-volatile then
+to be used it is read-write information so that has to be copied to
+the right place in ram for the compiler/toolchain. If you want that
+y to be 5 when your C code starts there is work that has to happen
+that is operating system target specific, we dont have an operating
+system and that is fine but as with an operating system we would have
+to tell the toolchain what to do with this section and we have to write
+the code to move that data to ram.
+
+I dont do that, I dont support that in these examples, take it or leave
+it there is still much you can learn here.
+
+My goal is first a pay-it-forward thing, as there have been many blogs
+and examples that have helped me "get it" and recover from failure.
+Second, baremetal, is full of traps that will consume you.  And when
+they do you often have little to no tools to figure it out (debuggers
+only work in controlled situations, they often fail to help you and
+sometimes cause problems rather than solve them, often there is no
+solution but to read the docs and the code and just figure it out). I
+have seen posts online from folks that have clearly been burned advising
+to never do this, well the reality is someone has to do this, every
+single product with a processor has someone that had to do this, someone
+has to know how to boot the processor and get the platform initialized
+so it can run application software, and then tune the compiler for that
+environment, make backends for the compiler so it can produce code for
+that processor, and then actuall compile some high level language.
+Without the "someones" out there, computing and processor based products
+will come to a screetching halt.  It might only be one out of 100,000
+programmers that can do any one of these tasks, it might only be 1
+out of 10,000, but you can be that one.  The best part of the job is
+that either from day one or eventually you get to do whatever you want
+there are far fewer rules in baremetal.  You might be the only one
+in the company that can get the product booted and running or tested
+or both, they rely on you and tolerate your quirks.  Now you might be
+just one of a team and as with any team there are various opinions and
+you have to find team based standards and conform to them, and work
+your way up.  So somewhere between day one and year 10-20 you get
+complete freedom, no rules, you can do what I did above and dictate
+that .data and .bss are not supported.  Certainly you can start making
+your own rules from day one using $2 boards you bought for playing with
+at home.
+
+Rambling.  Booting a processor, getting the compiler/toolchain to
+produce the code you want without extreme measures of going around
+the tools, is filled with failure.  I see folks preach away from any
+of this work as I ranted about above.  I feel sad as they clearly had
+a bad experience and were not able to get over the hump for some reason
+a goal here is to show you that you can do this.  It is not magic.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
