@@ -4,19 +4,44 @@ unsigned int GET32 ( unsigned int );
 void dummy ( unsigned int );
 
 #define GPIOABASE 0x48000000
-#define GPIOBBASE 0x48000400
-#define GPIOCBASE 0x48000800
-
 #define RCCBASE 0x40021000
+#define RCC_CR      (RCCBASE+0x00)
+#define RCC_CFGR    (RCCBASE+0x04)
 
 #define STK_CSR 0xE000E010
 #define STK_RVR 0xE000E014
 #define STK_CVR 0xE000E018
 #define STK_MASK 0x00FFFFFF
 
-#define DELAYVALUE 10
 
-static int delay ( unsigned int n )
+static void clock_init ( void )
+{
+    unsigned int ra;
+
+    ra=GET32(RCC_CR);
+    ra|=(1<<16); //HSEON
+    PUT32(RCC_CR,ra);
+    //wait for HSERDY
+    while(1)
+    {
+        ra=GET32(RCC_CR);
+        if(ra&(1<<17)) break;
+    }
+    //switch to HSE
+    ra=GET32(RCC_CFGR);
+    ra&=~3;
+    ra|=1;
+    PUT32(RCC_CFGR,ra);
+    //wait for it
+    while(1)
+    {
+        ra=GET32(RCC_CFGR);
+        if((ra&3)==1) break;
+    }
+}
+
+
+int delay ( unsigned int n )
 {
     unsigned int ra;
 
@@ -31,10 +56,13 @@ static int delay ( unsigned int n )
     return(0);
 }
 
+
 int notmain ( void )
 {
     unsigned int ra;
     unsigned int rx;
+
+    clock_init();
 
     ra=GET32(RCCBASE+0x14);
     ra|=1<<17; //enable port a

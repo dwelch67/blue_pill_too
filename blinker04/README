@@ -1,0 +1,11 @@
+
+See the previous level README for schematic and programmers reference
+information.
+
+PA4 on this board has an led.
+
+Just like blinker02 and blinker03 but uses the PLL to multiply the
+external HSE clock to 48MHz.  Read the warning in blinker03 about
+working with clocks in general.  With the stm32 chips we have the boot0
+pin to get into a bootloader so that is our get out of jail free card.
+

@@ -2,6 +2,9 @@
 See the previous level README for schematic and programmers reference
 information.
 
-PA4 on this board has an led.  This is a very basic blinker,
-blink time is not meant to be accurate or deterministic, but long
-enough to be seen.
+PA4 on this board has an led.
+
+The processor core has a timer, this uses the timer.  The internal
+clock HSI is 8Mhz, not as accurate as a crystal, but good enough.
+The timer is set to 1mhz timeout, 16 of those is 2 seconds, so the
+led is on 2 seconds then off 2 seconds.
