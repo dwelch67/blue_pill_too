@@ -9,3 +9,29 @@ external HSE clock to 48MHz.  Read the warning in blinker03 about
 working with clocks in general.  With the stm32 chips we have the boot0
 pin to get into a bootloader so that is our get out of jail free card.
 
+If you have this chip but not this board, and/or dont have the external
+clock you can still multiply the internal HSI clock, not as accurate
+but still works.  Read the ST docs with respect to the registers used
+in this example.
+
+As a general rule you need to check the flash clocking rules and all
+the peripherals.  Often the flash has a wait state register of some
+sort that you need to modify before making the processor speed faster.
+In this case for this chip there is a single bit we can leave it zero
+for <=24Mhz but have to make it a one for over 24Mhz so that the flash
+can keep up and not feed garbage into the processor (crashing).  Just
+because you get lucky on a lab bench or on one chip, doesnt mean that
+you can overclock your flash on the whole product line.
+
+Likewise as a general rule you need to check the rules for the
+peripherals they often have a max clock rate as well, and a register
+would be used to divide down the processor clock to generate the
+individual peripheral clocks.  We are safe on this specific chip if you
+look at the datasheet (different from the reference manual) it shows
+that fHCLK and fPCLK can operate up to 48Mhz.  Now that doesnt mean
+that you have to, you can certainly divide them down, this may save
+some power and may have other advantages (or disadvantages).  Compiled
+code (or even hand written assembly) cannot sustain peripheral register
+access at the cpu clock rate, so even half that is more than you can
+bang on a peripheral. Something to think about, this example doesnt
+care about power so the peripheral clock divisors are not touched.
