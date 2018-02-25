@@ -1,0 +1,36 @@
+
+See the previous level README for schematic and programmers reference
+information.
+
+See the led77.pdf and kicad pcb files.  This is NOT a charlieplexed
+board, there are three ground pins and four source pins.  To light
+an led a source needs to be high and a ground low.  To keep the others
+off reverse that.  When a row is grounded the others will stay off
+as you have them grounded too only the one or ones you have high will
+be on.
+
+using the square as pin 1 I have PA1 through PA7 connected to pin 1
+through 7 in that order.  1,2,3,4 control the columns (source),
+5,6,7 control the rows (sink).
+
+I cranked the clock up to 48MHz so that I could get a tiny little
+blink on the background leds.
+
+This is working its way to being a pseudo binary clock.  The top
+row is hours 1 to 12 in binary.  Second row is tens of minutes, third
+ones of minutes, both of these binary or BCD whatever you want to
+think of it as.  They go from 0-6 and 0-9
+
+This also uses interrupts, I have done a clock like this without
+interrupts, wanted to build the next one with interrupts, will see
+how this turns out.  The foreground will get the time from a time
+source (GPS receiver) the interrupt will blink the leds based on the
+current time.  This directory represents the background blinking
+the leds to show the time.
+
+If you go to oshpark.com and use the led77.kicad_pcb file you can create
+your own pcb.  Getting the parts and learning to solder is up to you.
+
+I dont want mine very bright want not to light the room in the dark,
+I use the lowest mcd leds I can find.  Well close to I use a 2 or
+2.5 mcd led, I think mouser has some 1 mcd leds.

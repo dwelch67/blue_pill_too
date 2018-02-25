@@ -1,0 +1,9 @@
+
+See the previous level README for schematic and programmers reference
+information.
+
+
+Slight variation on sevenled01.  Instead of blinking every led one at
+a time, this does a row at a time.
+
+

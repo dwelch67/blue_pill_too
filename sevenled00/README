@@ -1,0 +1,15 @@
+
+See the previous level README for schematic and programmers reference
+information.
+
+See the led77.pdf and kicad pcb files.  This is NOT a charlieplexed
+board, there are three ground pins and four source pins.  To light
+an led a source needs to be high and a ground low.
+
+using the square as pin 1 I have PA1 through PA7 connected to pin 1
+through 7 in that order.  1,2,3,4 control the columns (source),
+5,6,7 control the rows (sink).
+
+This example simply blinks them all on and all off to see them all
+working.
+
