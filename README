@@ -1,31 +1,35 @@
 
-If you go to ebay and search for
-
-stm32f103c8t6 board
-
-you will find a plethera of folks selling a breakout board for a
-couple bucks give or take.  There was Arduino support for this created
-by someone and also at some point this was given the name "blue pill".
 If you google
 
 stm32 blue pill
 
-you will find a number of websites on programming it or whatever.
+you will find a little blue board with usb on one end and four pins
+sticking out the other with a couple of jumpers on it, etc.  And a
+specific stm32 part on it.
 
 This repo has NOTHING to do with that blue pill nor anything Arduino
 these are baremetal examples without a library, this is about seeing
 and learning the details so you can make your own library or so you
 can read through others.
 
-This repo is centered around this blue pill that doesnt yet have a
-catchy name maybe blue pill two?  Search for
+Very similar in appearance to that board is one that if you search for
 
 stm32f030f4p6 board
 
-on ebal and you will see many vendors selling these boards as low
+on ebay and you will see many vendors selling these boards as low
 as less than a couple of dollars.  I have included a picture
 ebay_board.png to show the specific one you are looking for.  It has
 two four pin headers on the bottom one is uart based the other jtag.
+
+This repo is about that board/chip.
+
+You can also find this on amazon, I have been burned a number of
+times now ordering from china/asia, getting a note shipped about how
+sorry but the product will come later.  Nope, just means you got
+ripped off.  Read the reviews if any of them indicate the seller is
+doing that, move on.  Anyway, you can possibly find this board on
+amazon shipped from the us.  Not always, certainly for three or four
+times more than on ebay, but fewer worries.
 
 I tend to buy two of everything, as every so often no matter how much
 experience, you let some smoke out.  If you like the thing you might
@@ -82,7 +86,7 @@ to pull/rip the individual ones apart (some ribbon cables separate
 better than others).  Or get them already separate.
 
 An optional thing that may get discussed here is also very good for
-your toolbox is an SWD (not really jtag) solution.  
+your toolbox is an SWD (not really jtag) solution.
 The last thing and this is optional but still good for your toolbox is
 an SWD (not really jtag) solution, the cortex-m supports a single
 wire debug interface (SWD) which isnt a single wire but whatever
